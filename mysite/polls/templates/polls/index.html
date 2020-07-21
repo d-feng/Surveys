@@ -1,0 +1,50 @@
+{% load static %}
+<h2>Our Surveys</h2>
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+<!--    
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        
+        <li>{{ question.question_text }}</li>
+        <form action="{% url 'polls:vote' question.id %}" method="post">
+            {% csrf_token %}
+            {% for choice in question.choice_set.all %}
+                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+            {% endfor %}
+            <input type="submit" value="Vote">
+            </form>
+
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+-->
+
+{% if latest_question_list %}
+    <ul>        
+    <!-- <form action="{% url 'polls:index' %}" method="post"> -->
+    <form action="{% url 'polls:demoform' %}" method="post">
+    {% csrf_token %}
+    {% for question in latest_question_list %}
+        
+        <li>{{ question.question_text }}</li>
+        
+            
+            {% for choice in question.choice_set.all %}
+               <!-- <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">   --> 
+                <input type="radio" name="{{ question }}" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+            {% endfor %}
+            
+    {% endfor %}
+    <input type="submit" value="Vote">
+    </form>
+
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
