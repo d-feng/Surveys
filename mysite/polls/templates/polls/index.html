@@ -35,9 +35,15 @@
         
             
             {% for choice in question.choice_set.all %}
-               <!-- <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">   --> 
+            
+                <!-- <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">   --> 
                 <input type="radio" name="{{ question }}" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
                 <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+                {% if choice.textbox_text is not none %}
+                {{choice.textbox_text}}
+                <input type="text" name="myTextbox"> <br>
+                     
+                {% endif %}
             {% endfor %}
             
     {% endfor %}
